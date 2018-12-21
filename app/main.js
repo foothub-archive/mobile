@@ -1,14 +1,18 @@
 import Vue from 'nativescript-vue'
-import App from './components/App'
-import VueDevtools from 'nativescript-vue-devtools'
+import '@/plugins/vuex'
+import '@/plugins/vue-devtools'
+import Login from './components/Login'
 
-if(process.env.NODE_ENV !== 'production') {
-  Vue.use(VueDevtools)
-}
-// Prints Vue logs when --env.production is *NOT* set while building
-Vue.config.silent = (process.env.NODE_ENV !== 'production')
+import { authApi, coreApi } from './services'
+
+import store from './shared/src/vuex-store'
+import registerInterceptors from './shared/src/interceptors'
+
+registerInterceptors([authApi, coreApi])
 
 
 new Vue({
-  render: h => h('frame', [h(App)])
+  data() {return {store}},
+  store,
+  render: h => h('frame', [h(Login)]),
 }).$start()

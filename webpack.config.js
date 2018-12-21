@@ -187,13 +187,12 @@ module.exports = env => {
       },
       {
         test: /\.js$/,
-        loader: ['babel-loader', 'eslint-loader'],
+        loader: ['babel-loader'],
       },
       {
         test: /\.vue$/,
         use: [
           { loader: 'vue-loader', options: { compiler: NsVueTemplateCompiler }, },
-          { loader: 'eslint-loader'},
         ],
       },
       ],
