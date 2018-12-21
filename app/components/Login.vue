@@ -10,7 +10,7 @@
           class="header"
           text="footHub"
         />
-        <GridLayout rows="auto, auto, auto">
+        <GridLayout rows="auto, auto, auto, auto">
           <StackLayout
             row="0"
             class="input-field"
@@ -64,6 +64,7 @@
             />
             <StackLayout class="hr-light" />
           </StackLayout>
+
           <StackLayout
             v-show="!isLoggingIn"
             row="3"
@@ -126,10 +127,10 @@ export default {
     return {
       isLoggingIn: true,
       user: {
-        username: 'acci',
+        username: undefined,
         email: undefined,
-        password: 'ola123OLE',
-        confirmPassword: undefined, //'ola123OLE',
+        password: undefined,
+        confirmPassword: undefined,
       },
     }
   },
@@ -235,8 +236,8 @@ export default {
   }
 
   .logo {
-    margin-bottom: 12;
-    height: 50;
+    margin-bottom: 4%;
+    height: 8%;
     font-weight: bold;
   }
 
@@ -244,13 +245,13 @@ export default {
     horizontal-align: center;
     font-size: 25;
     font-weight: 600;
-    margin-bottom: 50;
+    margin-bottom: 2%;
     text-align: center;
     color: #008a2f;
   }
 
   .input-field {
-    margin-bottom: 25;
+    margin-bottom: 2%;
   }
 
   .input {
@@ -264,7 +265,10 @@ export default {
   }
 
   .btn-primary {
-    margin: 30 5 15 5;
+    margin-bottom: 4%;
+    margin-top: 2%;
+    margin-right: 5;
+    margin-left: 5;
   }
 
   .login-label {
@@ -274,7 +278,7 @@ export default {
   }
 
   .sign-up-label {
-    margin-bottom: 20;
+    margin-bottom: 4%;
   }
 
   .bold {
