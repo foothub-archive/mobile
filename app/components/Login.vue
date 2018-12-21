@@ -19,7 +19,7 @@
               v-model="user.username"
               class="input"
               hint="Username"
-              :isEnabled="!processing"
+              :isEnabled="!isLoading"
               autocorrect="false"
               autocapitalizationType="none"
               returnKeyType="next"
@@ -38,7 +38,7 @@
               v-model="user.email"
               class="input"
               hint="Email"
-              :isEnabled="!processing"
+              :isEnabled="!isLoading"
               keyboardType="email"
               autocorrect="false"
               autocapitalizationType="none"
@@ -56,7 +56,7 @@
               ref="password"
               v-model="user.password"
               class="input"
-              :isEnabled="!processing"
+              :isEnabled="!isLoading"
               hint="Password"
               secure="true"
               :returnKeyType="isLoggingIn ? 'done' : 'next'"
@@ -73,7 +73,7 @@
               ref="confirmPassword"
               v-model="user.confirmPassword"
               class="input"
-              :isEnabled="!processing"
+              :isEnabled="!isLoading"
               hint="Confirm password"
               secure="true"
               returnKeyType="done"
@@ -83,13 +83,13 @@
 
           <ActivityIndicator
             rowSpan="4"
-            :busy="processing"
+            :busy="isLoading"
           />
         </GridLayout>
 
         <Button
           :text="buttonText"
-          :isEnabled="!processing"
+          :isEnabled="!isLoading"
           class="btn btn-primary m-t-20"
           @tap="submit"
         />
@@ -119,13 +119,12 @@
 
 <script>
 import App from "./App"
-import { LOGIN_A } from "../shared/src/vuex-store/constants/auth"
+import { IS_LOADING_G, LOGIN_A } from "../shared/src/vuex-store/constants/auth"
 
 export default {
   data() {
     return {
       isLoggingIn: true,
-      processing: false,
       user: {
         username: 'acci',
         email: undefined,
@@ -135,6 +134,9 @@ export default {
     }
   },
   computed: {
+    isLoading() {
+      return this.$store.getters[IS_LOADING_G]
+    },
     buttonText() {
       return this.isLoggingIn ? 'Log In' : 'Sign Up'
     },
@@ -153,7 +155,6 @@ export default {
         )
         return
       }
-      this.processing = true
       if (this.isLoggingIn) {
         this.login()
       } else {
